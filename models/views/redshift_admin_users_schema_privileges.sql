@@ -1,3 +1,13 @@
+{{
+  config({
+    "materialized" : "view",
+    "bind":False,
+    "post-hook" : [
+      "grant select on table {{this}} to group non_gl_read_only"
+      ]
+    })
+}}
+
 with tables as (
 
   select * from {{ref('pg_tables')}}

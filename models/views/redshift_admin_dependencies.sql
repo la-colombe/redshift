@@ -1,5 +1,15 @@
 {# SOURCE: https://github.com/awslabs/amazon-redshift-utils/blob/master/src/AdminViews/v_view_dependency.sql #}
 
+{{
+  config({
+    "materialized" : "view",
+    "bind":False,
+    "post-hook" : [
+      "grant select on table {{this}} to group non_gl_read_only"
+      ]
+    })
+}}
+
 select distinct
   srcobj.oid as source_oid
   , srcnsp.nspname as source_schemaname

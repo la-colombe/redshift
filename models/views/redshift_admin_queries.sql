@@ -1,3 +1,13 @@
+{{
+  config({
+    "materialized" : "view",
+    "bind":False,
+    "post-hook" : [
+    	"grant select on table {{this}} to group non_gl_read_only"
+    	]
+    })
+}}
+
 with queries as (
 
   select * from {{ref('stl_query')}}
@@ -29,6 +39,7 @@ select
 
 , queries.started_at
 , queries.finished_at
+, queries.query_text
 
 , timings.queue_start_time
 , timings.queue_end_time
