@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: pg_catalog
+    loader: Redshift system table
+
+    tables:
+
+    - name: stl_load_errors
+      description: Copy errors. https://docs.aws.amazon.com/redshift/latest/dg/r_STL_LOAD_ERRORS.html
+    - name: stl_load_commits
+      description: Successful copy commands. https://docs.aws.amazon.com/redshift/latest/dg/r_STL_LOAD_COMMITS.html

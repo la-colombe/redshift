@@ -4,6 +4,7 @@ select
 , query as query_id
 , xid as transaction_id
 , label
+, querytxt as query_text
 , pid
 , database
 , starttime as started_at
