@@ -16,7 +16,8 @@ select
   c.lines_scanned,
   c.errors,
   c.status,
-  c.updated_at,
+  c.updated_at as updated_at_utc,
+  convert_timezone('UTC','America/New_York',c.updated_at) as updated_at,
   c.file_format
 
 from {{ref('stl_load_commits')}} c 

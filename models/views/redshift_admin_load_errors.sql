@@ -14,7 +14,8 @@ select
   t.schema,
   t.table,
   e.query_id,
-  e.start_time,
+  e.start_time as start_time_utc,
+  convert_timezone('UTC','America/New_York',e.start_time) as start_time,
   e.file_name,
   e.line_number,
   e.column_name,
@@ -28,4 +29,4 @@ select
 
 from {{ref('stl_load_errors')}} e 
 join {{ref('pg_user')}} u using(user_id)
-join {{ref('redshift_admin_table_stats')}} t using(table_id)
+left join {{ref('redshift_admin_table_stats')}} t using(table_id)
