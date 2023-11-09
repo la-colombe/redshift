@@ -39,7 +39,11 @@ select
 
 , queries.started_at
 , queries.finished_at
-, queries.query_text
+
+, case
+  	when regexp_instr(queries.query_text, '[^[:print:][:cntrl:]]') > 0 then 'Cannot print: contains non-ASCII characters'
+  	else queries.query_text
+	end as query_text
 
 , timings.queue_start_time
 , timings.queue_end_time
